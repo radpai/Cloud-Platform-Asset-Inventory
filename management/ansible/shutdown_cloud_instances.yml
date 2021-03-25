@@ -1,0 +1,40 @@
+- name: Stop AWS, GCP or Azure instances
+  hosts: localhost
+  gather_facts: false
+  vars:
+    instance_ids:
+      - '{{ instance_ids }}'
+    name:
+      - '{{ name }}'
+    resource_group:
+      - '{{ resource_group }}'
+    project:
+      - '{{ project }}'
+  tasks:
+    - name: Stop AWS instances
+      amazon.aws.ec2:
+        instance_ids: '{{ instance_ids }}'
+        region: us-west-1
+        state: stopped
+        wait: True
+      when: instance_ids is regex("(i-\d|\w)+")
+
+    - name: Stop Azure instances
+      azure_rm_virtualmachine:
+        resource_group: '{{ resource_group }}'
+        name: '{{ name }}'
+        started: no
+      when: name is regex("(tk-azure-\d|\w)+")
+
+    - name: Stop GCP instances
+      gcp_compute_instance:
+        name: '{{ name }}'
+        project: '{{ project }}'
+        zone: us-west2-a
+        auth_kind: serviceaccount
+        service_account_file: /root/.gcp/application_default_credentials.json
+        state: present
+        status: TERMINATED
+      when: name is regex("(tk-gcp-\d|\w)+")
+
+

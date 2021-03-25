@@ -1,0 +1,37 @@
+---
+###############################################################################
+# NOTES:
+#   1. Extend the default yamllint configuration.
+#   2. Ignore vendored code.
+#   3. Allow only one way to do things to keep the code consistent:
+#     a. Prefer block style over flow style.
+#     b. Prefer explicit null values.
+#     c. Prefer indentation with two spaces.
+#     d. Prefer indented multiline strings.
+#     e. Prefer indented sequences.
+#     f. Prefer alphabetical ordering of keys in mappings to make it easier to
+#       search for things.
+#     g. Prevent quoted octal numbers to prevent accidents.
+#     h. Prefer quoting only when necessary.
+#     i. Prefer true and false for truthy values.
+#   4. More information can be found here
+#     a. https://yamllint.readthedocs.io/en/stable/configuration.html
+###############################################################################
+extends: default
+ignore: |
+  services/test_kitchen/provisioners/ansible/playbooks/roles/vendor
+rules:
+  braces:
+    forbid: true
+  brackets:
+    forbid: true
+  empty-values: enable
+  indentation:
+    check-multi-line-strings: true
+    indent-sequences: true
+    spaces: 2
+  key-ordering: enable
+  octal-values: enable
+  quoted-strings:
+    required: only-when-needed
+  truthy: enable

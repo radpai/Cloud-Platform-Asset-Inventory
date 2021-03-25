@@ -1,0 +1,8 @@
+---
+auth_kind: serviceaccount
+plugin: gcp_compute
+projects:
+  - valid-oven-304217
+service_account_file: /root/.gcp/application_default_credentials.json
+# zones:
+#   - us-central1-a

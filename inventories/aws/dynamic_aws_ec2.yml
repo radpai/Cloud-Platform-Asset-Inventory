@@ -1,0 +1,11 @@
+---
+
+plugin: aws_ec2
+#regions:
+#  - us-west-1
+
+filters:
+  # all instances with their `created-by` tag set to `test-kitchen`
+  tag:created-by:
+    - test-kitchen
+    

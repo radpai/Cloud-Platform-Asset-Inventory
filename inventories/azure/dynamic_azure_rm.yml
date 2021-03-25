@@ -1,0 +1,10 @@
+---
+auth_source: /root/.azure/credentials
+include_vm_resource_groups:
+  - '*'
+plugin: azure.azcollection.azure_rm
+# places a host in the named group if the associated condition evaluates to true
+conditional_groups:
+  # since this will be true for every host, every host sourced from this inventory plugin config will be in the
+  # group 'all_the_hosts'
+  all_the_hosts: true

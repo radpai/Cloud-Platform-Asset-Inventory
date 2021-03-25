@@ -1,0 +1,47 @@
+---
+x-common: &x-common
+  init: true
+
+secrets:
+  aws_credentials_v1:
+    file: ./.credentials/aws/credentials
+  azure_credentials_v1:
+    file: ./.credentials/azure/credentials
+  gcp_credentials_v1:
+    file: ./.credentials/gcp/application_default_credentials.json
+
+services:
+  asset_inventory_collector:
+    <<:
+      - *x-common
+    build: .
+    secrets:
+      -
+        gid: '0'
+        mode: '0400'
+        source: aws_credentials_v1
+        target: /root/.aws/credentials
+        uid: '0'
+      -
+        gid: '0'
+        mode: '0400'
+        source: azure_credentials_v1
+        target: /root/.azure/credentials
+        uid: '0'
+      -
+        gid: '0'
+        mode: '0400'
+        source: gcp_credentials_v1
+        target: /root/.gcp/application_default_credentials.json
+        uid: '0'
+    volumes:
+        - "./.credentials/gcp/application_default_credentials.json:\
+          /usr/src/app/application_default_credentials.json"
+        - inventory:/usr/src/app/inventory:rw
+volumes:
+  inventory: {}
+  
+version: "3.9"
+
+
+
