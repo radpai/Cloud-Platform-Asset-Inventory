@@ -1,11 +1,12 @@
 ---
 
 plugin: aws_ec2
+#add regions section if need to filter assets by specific region
 #regions:
 #  - us-west-1
 
 filters:
-  # all instances with their `created-by` tag set to `test-kitchen`
+  # all instances with their `created-by` tag set to `test-vm-tag`
   tag:created-by:
-    - test-kitchen
+    - test-vm-tag
     

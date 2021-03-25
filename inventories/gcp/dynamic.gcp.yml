@@ -1,8 +1,10 @@
 ---
 auth_kind: serviceaccount
 plugin: gcp_compute
+# get assets for particular project
 projects:
-  - valid-oven-304217
+  - test-project-name
 service_account_file: /root/.gcp/application_default_credentials.json
+# add zone filter if you need to filter assets by zone
 # zones:
 #   - us-central1-a
