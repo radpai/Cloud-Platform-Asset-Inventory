@@ -57,4 +57,3 @@ tenant=<tenant>
 ```bash
 $ docker-compose up --build
 ```
-
